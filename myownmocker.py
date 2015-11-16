@@ -1,7 +1,7 @@
 import random
 import string
 import os
-from flask import Flask, jsonify, request, abort, Response
+from flask import Flask, jsonify, request, abort, Response, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug.exceptions import default_exceptions
 from werkzeug.exceptions import HTTPException
@@ -49,19 +49,7 @@ db = SQLAlchemy(app)
 
 @app.route('/')
 def index():
-    return '''
-<html>
-    <head>
-        <title>MyOwnMocker</title>
-    </head>
-    <body>
-    <center>
-        <h3>myownmocker</h3>
-        <p>Nothing to see here, move along to the <a href="https://github.com/fopina/myownmocker/">source</a></p>
-    </center>
-    </body>
-</html>
-'''
+    return redirect('http://fopina.github.io/myownmocker/')
 
 
 @app.route('/register/', methods=['GET'])
