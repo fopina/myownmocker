@@ -27,7 +27,10 @@ class MOMTestCase(unittest.TestCase):
         return res, token
 
     def test_register_fail(self):
-        from mock import patch
+        try:
+            from mock import patch
+        except ImportError:
+            self.skipTest('requires mock, run: pip install mock')
         with patch('random.SystemRandom.choice', return_value='a'):
             # register once
             res, _ = self._register()
@@ -99,7 +102,6 @@ class MOMTestCase(unittest.TestCase):
                 'path': path,
                 'status_code': status_code,
                 'content_type': content_type,
-                'content_encoding': kwargs.get('content_encoding'),
                 'body': kwargs.get('body')
             }),
         )

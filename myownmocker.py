@@ -78,7 +78,6 @@ def setup(token):
         "path": "/action/path/",
         "status_code": 200,
         "content_type": "application/json",
-        "content_encoding": "UTF-8",
         "body": "{\"field\": \"value\"}"
     }
     '''
@@ -98,7 +97,6 @@ def setup(token):
             pt = MockPath(mt.token, path)
         pt.status_code = data['status_code']
         pt.content_type = data['content_type']
-        pt.content_encoding = data.get('content_encoding')
         pt.body = data.get('body')
         db.session.add(pt)
         db.session.commit()
@@ -133,7 +131,6 @@ class MockPath(db.Model):
     path = db.Column(db.String(200), nullable=False)
     status_code = db.Column(db.Integer, nullable=False)
     content_type = db.Column(db.String(30), nullable=False)
-    content_encoding = db.Column(db.String(20))
     body = db.Column(db.String(500))
 
     token = db.relationship('MockToken', backref=db.backref('paths', lazy='dynamic'))
