@@ -31,8 +31,119 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a id="setting-up-your-own-copy-of-mom" class="anchor" href="#setting-up-your-own-copy-of-mom" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up your own copy of MOM</h3>
+        <h2>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h2>
+
+<h4>
+<a id="register-for-a-mock-token" class="anchor" href="#register-for-a-mock-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Register (for a mock token)</h4>
+
+<p>This is the first call you need to make to generate a mock API token to create mock API paths later</p>
+
+<pre><code>GET /register/
+</code></pre>
+
+<h6>
+<a id="example-response" class="anchor" href="#example-response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Response</h6>
+
+<pre><code>&lt; HTTP/1.1 200 OK
+&lt; Content-Type: application/json
+
+{
+  "token": "MeB3aNo4yDXrtNH6"
+}
+</code></pre>
+
+<h3>
+<a id="setup-a-mock-path" class="anchor" href="#setup-a-mock-path" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup (a mock path)</h3>
+
+<p>This is the call to setup (create) mock API paths</p>
+
+<pre><code>POST /setup/:token/
+Content-Type: application/json
+</code></pre>
+
+<h6>
+<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h6>
+
+<table>
+<thead>
+<tr>
+<th align="center">Name</th>
+<th align="center">Type</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">path</td>
+<td align="center">string</td>
+<td align="center">
+<strong>Required</strong>.</td>
+</tr>
+<tr>
+<td align="center">status_code</td>
+<td align="center">int</td>
+<td align="center">
+<strong>Required</strong>.</td>
+</tr>
+<tr>
+<td align="center">content_type</td>
+<td align="center">string</td>
+<td align="center">
+<strong>Required</strong>.</td>
+</tr>
+<tr>
+<td align="center">content_encoding</td>
+<td align="center">string</td>
+<td align="center">Optional.</td>
+</tr>
+<tr>
+<td align="center">body</td>
+<td align="center">string</td>
+<td align="center">Optional.</td>
+</tr>
+</tbody>
+</table>
+
+<h6>
+<a id="example-input" class="anchor" href="#example-input" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Input</h6>
+
+<pre><code>{
+    "path": "login/",
+    "status_code": 400,
+    "content_type": "application/json",
+    "content_encoding": "UTF-8",
+    "body": "{\"code\": \"invalid_login\"}"
+}
+</code></pre>
+
+<h6>
+<a id="example-response-1" class="anchor" href="#example-response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Response</h6>
+
+<pre><code>&lt; HTTP/1.1 200 OK
+&lt; Content-Type: application/json
+
+{
+    "message": "ok"
+}
+</code></pre>
+
+<h3>
+<a id="mock-your-mock-api-base-url" class="anchor" href="#mock-your-mock-api-base-url" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mock (your mock API base URL)</h3>
+
+<p>This is your mock API "new" base URL. All the mock API paths you setup are available under <code>/mock/:token/</code> for both <code>GET</code>and <code>POST</code>methods.<br>
+Example (using token and path created in <code>register</code>and <code>setup</code>section examples):</p>
+
+<pre><code>$ curl -v https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/
+&lt; HTTP/1.1 400 BAD REQUEST
+&lt; Content-Type: application/json
+&lt; Content-Length: 25
+&lt; 
+{"code": "invalid_login"}
+</code></pre>
+
+<h2>
+<a id="setting-up-your-own-copy-of-mom" class="anchor" href="#setting-up-your-own-copy-of-mom" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up your own copy of MOM</h2>
 
 <p>Using heroku cli, settings your own copy is as easy as:</p>
 
@@ -68,7 +179,7 @@ To https://git.heroku.com/evening-scrubland-9609.git
 
 $ heroku run ./manage.py initdb
 Running ./manage.py initdb on evening-scrubland-9609... up, run.7551
-Using database postgres://frsnvzfkdflfdf:azT4aMeprPYiQjyA_KA2whCreQ@ec2-107-21-219-235.compute-1.amazonaws.com:5432/dk3m44gfjo50g
+Using database postgres://frsnvzfkdflxFc:ZfT4aMeprPYiQC@ec2-107-21-219-235.compute-1.amazonaws.com:5432/dk3m44gfjo30g
 Created tables
 </code></pre>
 
