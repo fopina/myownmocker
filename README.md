@@ -1,9 +1,17 @@
 # MyOwnMocker
 Online mock server
 
-[Setting up your own copy of MOM](#text)
+## API
 
-## <a name="text">Setting up your own copy of MOM</a>
+### Register
+
+    ola
+    
+###### Response
+
+    ole
+
+## Setting up your own copy of MOM
 
 Using heroku cli, settings your own copy is as easy as:
 
