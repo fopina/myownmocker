@@ -36,7 +36,7 @@
 
 <p>Using heroku cli, settings your own copy is as easy as:</p>
 
-<pre><code>skmac:workspace fopina$ git clone https://github.com/fopina/myownmocker
+<pre><code>$ git clone https://github.com/fopina/myownmocker
 Cloning into 'myownmocker'...
 remote: Counting objects: 35, done.
 remote: Compressing objects: 100% (28/28), done.
@@ -44,8 +44,8 @@ remote: Total 35 (delta 5), reused 11 (delta 2), pack-reused 0
 Unpacking objects: 100% (35/35), done.
 Checking connectivity... done.
 
-skmac:tmp fopina$ cd myownmocker/
-skmac:myownmocker fopina$ heroku create
+$ cd myownmocker/
+$ heroku create
 Creating evening-scrubland-9609... done, stack is cedar-14
 https://evening-scrubland-9609.herokuapp.com/ | https://git.heroku.com/evening-scrubland-9609.git
 Git remote heroku added
@@ -66,7 +66,7 @@ remote: Verifying deploy... done.
 To https://git.heroku.com/evening-scrubland-9609.git
  * [new branch]      master -&gt; master
 
-skmac:myownmocker fopina$ heroku run ./manage.py initdb
+$ heroku run ./manage.py initdb
 Running ./manage.py initdb on evening-scrubland-9609... up, run.7551
 Using database postgres://frsnvzfkdflfdf:azT4aMeprPYiQjyA_KA2whCreQ@ec2-107-21-219-235.compute-1.amazonaws.com:5432/dk3m44gfjo50g
 Created tables
