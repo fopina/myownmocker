@@ -102,6 +102,7 @@ class MOMTestCase(unittest.TestCase):
                 'path': path,
                 'status_code': status_code,
                 'content_type': content_type,
+                'custom_headers': kwargs.get('custom_headers', {}),
                 'body': kwargs.get('body')
             }),
         )
@@ -137,13 +138,21 @@ class MOMTestCase(unittest.TestCase):
             'value',
             202,
             'application/json',
-            body='test'
+            body='test',
+            custom_headers={
+                'X-My-Header': 123,
+                'X-My-Header2': 123,
+            }
         )
         self.assertEqual(res.status_code, 200)
 
         res = self.app.get('/mock/%s/value' % token)
         self.assertEqual(res.status_code, 202)
         self.assertEqual(res.headers['Content-Type'], 'application/json')
+        self.assertIn('X-My-Header', res.headers)
+        self.assertIn('X-My-Header2', res.headers)
+        self.assertEqual(res.headers['X-My-Header'], '123')
+        self.assertEqual(res.headers['X-My-Header2'], '123')
         self.assertEqual(res.data, 'test')
         return token
 
@@ -156,13 +165,22 @@ class MOMTestCase(unittest.TestCase):
             'value',
             200,
             'text/html',
-            body='test2'
+            body='test2',
+            custom_headers={
+                'X-My-Header2': 124,
+                'X-My-Header3': 124,
+            }
         )
         self.assertEqual(res.status_code, 200)
 
         res = self.app.get('/mock/%s/value' % token)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res.headers['Content-Type'], 'text/html')
+        self.assertNotIn('X-My-Header', res.headers)
+        self.assertIn('X-My-Header2', res.headers)
+        self.assertIn('X-My-Header3', res.headers)
+        self.assertEqual(res.headers['X-My-Header2'], '124')
+        self.assertEqual(res.headers['X-My-Header3'], '124')
         self.assertEqual(res.data, 'test2')
         return token
 

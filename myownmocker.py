@@ -98,6 +98,12 @@ def setup(token):
         pt.content_type = data['content_type']
         pt.body = data.get('body')
         db.session.add(pt)
+        custom_headers = data.get('custom_headers')
+        pt.headers.delete()
+        if type(custom_headers) == dict:
+            for h_name, h_value in custom_headers.iteritems():
+                header = MockHeader(pt.id, h_name, h_value)
+                db.session.add(header)
         db.session.commit()
     except KeyError as e:
         abort(400, 'Missing required field: %s' % e.args[0])
@@ -111,12 +117,29 @@ def use_api(token, path):
     if pt is None:
         abort(404, 'Method not found')
 
+    custom_headers = {}
+
+    for header in pt.headers.all():
+        custom_headers[header.name] = header.value
+
     resp = Response(
         pt.body,
         content_type=pt.content_type,
         status=pt.status_code,
+        headers=custom_headers,
     )
     return resp
+
+
+class MockToken(db.Model):
+    token = db.Column(db.String(16), primary_key=True)
+    created_on = db.Column(db.DateTime, server_default=db.func.now())
+
+    def __init__(self, token=None):
+        self.token = token
+
+    def __repr__(self):
+        return '<MockToken %r>' % (self.token)
 
 
 class MockPath(db.Model):
@@ -129,7 +152,7 @@ class MockPath(db.Model):
     token_id = db.Column(db.String(16), db.ForeignKey('mock_token.token'), nullable=False)
     path = db.Column(db.String(200), nullable=False)
     status_code = db.Column(db.Integer, nullable=False)
-    content_type = db.Column(db.String(30), nullable=False)
+    content_type = db.Column(db.String(100), nullable=False)
     body = db.Column(db.String(500))
 
     token = db.relationship('MockToken', backref=db.backref('paths', lazy='dynamic'))
@@ -139,12 +162,19 @@ class MockPath(db.Model):
         self.path = path
 
 
-class MockToken(db.Model):
-    token = db.Column(db.String(16), primary_key=True)
-    created_on = db.Column(db.DateTime, server_default=db.func.now())
+class MockHeader(db.Model):
+    __table_args__ = (
+        db.UniqueConstraint('path_id', 'name', name='_path_name_uc'),
+    )
 
-    def __init__(self, token=None):
-        self.token = token
+    id = db.Column(db.Integer, primary_key=True)
+    path_id = db.Column(db.Integer, db.ForeignKey('mock_path.id'), nullable=False, index=True)
+    name = db.Column(db.String(100), nullable=False)
+    value = db.Column(db.String(100), nullable=False)
 
-    def __repr__(self):
-        return '<MockToken %r>' % (self.token)
+    path = db.relationship('MockPath', backref=db.backref('headers', lazy='dynamic'))
+
+    def __init__(self, path_id, name, value):
+        self.path_id = path_id
+        self.name = name
+        self.value = value
