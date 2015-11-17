@@ -3,13 +3,24 @@ Online mock server
 
 ## API
 
-### Register
+#### /register/
 
-    ola
+This is the first call you need to make to generate a mock API token to create mock API paths later
+
+    $ curl https://mom.skmobi.com/register/
     
-###### Response
+**Example Response**
 
-    ole
+    < HTTP/1.1 200 OK
+    < Content-Type: application/json
+    
+    {
+      "token": "MeB3aNo4yDXrtNH6"
+    }
+
+### /setup/
+
+This is the 
 
 ## Setting up your own copy of MOM
 
