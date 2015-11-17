@@ -83,7 +83,8 @@ Using heroku cli, settings your own copy is as easy as:
     Creating evening-scrubland-9609... done, stack is cedar-14
     https://evening-scrubland-9609.herokuapp.com/ | https://git.heroku.com/evening-scrubland-9609.git
     Git remote heroku added
-    skmac:myownmocker fopina$ git push heroku
+    
+    $ git push heroku
     Counting objects: 14, done.
     Delta compression using up to 4 threads.
     Compressing objects: 100% (11/11), done.
