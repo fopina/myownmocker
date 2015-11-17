@@ -47,9 +47,24 @@ This is the call to setup (create) mock API paths
 
 ###### Example Response
 
+    < HTTP/1.1 200 OK
+    < Content-Type: application/json
+
     {
         "message": "ok"
     }
+    
+### Mock (your mock API base URL)
+
+This is your mock API "new" base URL. All the mock API paths you setup are available under `/mock/:token/` for both `GET`and `POST`methods.  
+Example (using token and path created in `register`and `setup`section examples):
+
+    $ curl -v https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/
+    < HTTP/1.1 400 BAD REQUEST
+    < Content-Type: application/json
+    < Content-Length: 25
+    < 
+    {"code": "invalid_login"}
 
 ## Setting up your own copy of MOM
 
@@ -87,7 +102,7 @@ Using heroku cli, settings your own copy is as easy as:
 
     $ heroku run ./manage.py initdb
     Running ./manage.py initdb on evening-scrubland-9609... up, run.7551
-    Using database postgres://frsnvzfkdflfdf:azT4aMeprPYiQjyA_KA2whCreQ@ec2-107-21-219-235.compute-1.amazonaws.com:5432/dk3m44gfjo50g
+    Using database postgres://frsnvzfkdflxFc:ZfT4aMeprPYiQC@ec2-107-21-219-235.compute-1.amazonaws.com:5432/dk3m44gfjo30g
     Created tables
 
 And it's live!
