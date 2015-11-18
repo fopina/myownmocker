@@ -32,7 +32,6 @@ This is the call to setup (create) mock API paths
 | path              | string    | **Required**. |
 | status_code       | int       | **Required**. |
 | content_type      | string    | **Required**. |
-| content_encoding  | string    | Optional.     |
 | body              | string    | Optional.     |
 
 ###### Example Input
@@ -41,7 +40,6 @@ This is the call to setup (create) mock API paths
         "path": "login/",
         "status_code": 400,
         "content_type": "application/json",
-        "content_encoding": "UTF-8",
         "body": "{\"code\": \"invalid_login\"}"
     }
 
@@ -68,7 +66,7 @@ Example (using token and path created in `register`and `setup`section examples):
 
 ## Setting up your own copy of MOM
 
-Using [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command), setting your own copy is as easy as:
+Using [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command), setting up your own copy is as easy as:
 
     $ git clone https://github.com/fopina/myownmocker
     Cloning into 'myownmocker'...

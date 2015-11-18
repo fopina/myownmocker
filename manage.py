@@ -15,7 +15,7 @@ def initdb():
 
 
 @manager.command
-def update_readme():
+def readme():
     import pydoc
     f = open('README.md', 'w')
     f.write('''# MyOwnMocker
@@ -32,7 +32,7 @@ Online mock server
     f.write('\n\n')
     f.write('''## Setting up your own copy of MOM
 
-Using heroku cli, settings your own copy is as easy as:
+Using [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command), setting up your own copy is as easy as:
 
     $ git clone https://github.com/fopina/myownmocker
     Cloning into 'myownmocker'...

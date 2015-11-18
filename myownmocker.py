@@ -102,7 +102,6 @@ def setup(token):
     | path              | string    | **Required**. |
     | status_code       | int       | **Required**. |
     | content_type      | string    | **Required**. |
-    | content_encoding  | string    | Optional.     |
     | body              | string    | Optional.     |
 
     ###### Example Input
@@ -111,7 +110,6 @@ def setup(token):
             "path": "login/",
             "status_code": 400,
             "content_type": "application/json",
-            "content_encoding": "UTF-8",
             "body": "{\\\"code\\\": \\\"invalid_login\\\"}"
         }
 
