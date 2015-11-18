@@ -31,11 +31,38 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h2>
+        <p>For some tests  (such as XCode UI Testing) we cannot use dependency injection nor mock classes. The easiest solution is to run the application using a mock server.</p>
+
+<p>There are a few solutions already (such as <a href="http://mocky.io">http://mocky.io</a> and <a href="http://mockable.io">http://mockable.io</a>) but I wanted to make my own, MyOwnMocker.</p>
+
+<p>This code is running live in <a href="https://mom.skmobi.com/">https://mom.skmobi.com/</a> so whenever you need, just call MOM.</p>
+
+<h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<ol>
+<li>
+<a href="#api">API</a>
+
+<ol>
+<li> <a href="#register">Register</a>
+</li>
+<li> <a href="#setup">Setup</a>
+</li>
+<li> <a href="#mock">Mock</a>
+</li>
+</ol>
+</li>
+<li><a href="#setting-up-your-own-copy-of-mom">Setting up your own copy of MOM</a></li>
+</ol>
+
+<h2>
 <a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h2>
 
 <h4>
-<a id="register-for-a-mock-token" class="anchor" href="#register-for-a-mock-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Register (for a mock token)</h4>
+<a id="register" class="anchor" href="#register" aria-hidden="true"><span class="octicon octicon-link"></span></a>Register</h4>
+
+<p>Register for a mock token.</p>
 
 <p>This is the first call you need to make to generate a mock API token to create mock API paths later</p>
 
@@ -54,7 +81,9 @@
 </code></pre>
 
 <h3>
-<a id="setup-a-mock-path" class="anchor" href="#setup-a-mock-path" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup (a mock path)</h3>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h3>
+
+<p>Setup a mock path.</p>
 
 <p>This is the call to setup (create) mock API paths</p>
 
@@ -93,11 +122,6 @@ Content-Type: application/json
 <strong>Required</strong>.</td>
 </tr>
 <tr>
-<td align="center">content_encoding</td>
-<td align="center">string</td>
-<td align="center">Optional.</td>
-</tr>
-<tr>
 <td align="center">body</td>
 <td align="center">string</td>
 <td align="center">Optional.</td>
@@ -112,7 +136,6 @@ Content-Type: application/json
     "path": "login/",
     "status_code": 400,
     "content_type": "application/json",
-    "content_encoding": "UTF-8",
     "body": "{\"code\": \"invalid_login\"}"
 }
 </code></pre>
@@ -129,23 +152,25 @@ Content-Type: application/json
 </code></pre>
 
 <h3>
-<a id="mock-your-mock-api-base-url" class="anchor" href="#mock-your-mock-api-base-url" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mock (your mock API base URL)</h3>
+<a id="mock" class="anchor" href="#mock" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mock</h3>
 
-<p>This is your mock API "new" base URL. All the mock API paths you setup are available under <code>/mock/:token/</code> for both <code>GET</code>and <code>POST</code>methods.<br>
+<p>Your mock API base URL.</p>
+
+<p>This is your mock API "new" base URL. All the mock API paths you setup are available under <code>/mock/:token/</code> for both <code>GET</code>and <code>POST</code>methods.
 Example (using token and path created in <code>register</code>and <code>setup</code>section examples):</p>
 
 <pre><code>$ curl -v https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/
 &lt; HTTP/1.1 400 BAD REQUEST
 &lt; Content-Type: application/json
 &lt; Content-Length: 25
-&lt; 
+&lt;
 {"code": "invalid_login"}
 </code></pre>
 
 <h2>
 <a id="setting-up-your-own-copy-of-mom" class="anchor" href="#setting-up-your-own-copy-of-mom" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up your own copy of MOM</h2>
 
-<p>Using <a href="https://devcenter.heroku.com/articles/heroku-command">Heroku CLI</a>, setting your own copy is as easy as:</p>
+<p>Using <a href="https://devcenter.heroku.com/articles/heroku-command">Heroku CLI</a>, setting up your own copy is as easy as:</p>
 
 <pre><code>$ git clone https://github.com/fopina/myownmocker
 Cloning into 'myownmocker'...
@@ -169,11 +194,11 @@ Writing objects: 100% (14/14), 4.81 KiB | 0 bytes/s, done.
 Total 14 (delta 2), reused 0 (delta 0)
 remote: Compressing source files... done.
 remote: Building source:
-remote: 
+remote:
 (...)
 remote: -----&gt; Launching... done, v4
 remote:        https://evening-scrubland-9609.herokuapp.com/ deployed to Heroku
-remote: 
+remote:
 remote: Verifying deploy... done.
 To https://git.heroku.com/evening-scrubland-9609.git
  * [new branch]      master -&gt; master
