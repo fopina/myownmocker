@@ -4,9 +4,18 @@ There are a few solutions already (such as http://mocky.io and http://mockable.i
 
 This code is running live in https://mom.skmobi.com/ so whenever you need, just call MOM.
 
+## Overview
+
+1. [API](#api)
+    1.  [Register](#register)
+    2.  [Setup](#setup)
+    3.  [Mock](#mock)
+2. [Setting up your own copy of MOM](#setting-up-your-own-copy-of-mom)
+
 ## API
 
-#### Register (for a mock token)
+#### Register 
+Register for a mock token.
 
 This is the first call you need to make to generate a mock API token to create mock API paths later
 
