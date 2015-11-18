@@ -54,7 +54,8 @@ def index():
 @app.route('/register/', methods=['GET'])
 def register():
     """
-    #### Register (for a mock token)
+    #### Register
+    Register for a mock token.
 
     This is the first call you need to make to generate a mock API token to create mock API paths later
 
@@ -88,7 +89,8 @@ def register():
 @app.route('/setup/<token>/', methods=['POST'])
 def setup(token):
     """
-    ### Setup (a mock path)
+    ### Setup
+    Setup a mock path.
 
     This is the call to setup (create) mock API paths
 
@@ -155,7 +157,8 @@ def setup(token):
 @app.route('/mock/<token>/<path:path>', methods=['GET', 'POST'])
 def use_api(token, path):
     """
-    ### Mock (your mock API base URL)
+    ### Mock
+    Your mock API base URL.
 
     This is your mock API "new" base URL. All the mock API paths you setup are available under `/mock/:token/` for both `GET`and `POST`methods.
     Example (using token and path created in `register`and `setup`section examples):

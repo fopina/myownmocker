@@ -14,8 +14,8 @@ This code is running live in https://mom.skmobi.com/ so whenever you need, just 
 
 ## API
 
-#### Register 
-Register for a mock token.
+#### Register
+Register for a mock token
 
 This is the first call you need to make to generate a mock API token to create mock API paths later
 
@@ -30,7 +30,8 @@ This is the first call you need to make to generate a mock API token to create m
       "token": "MeB3aNo4yDXrtNH6"
     }
 
-### Setup (a mock path)
+### Setup
+Setup a mock path.
 
 This is the call to setup (create) mock API paths
 
@@ -64,7 +65,8 @@ This is the call to setup (create) mock API paths
         "message": "ok"
     }
 
-### Mock (your mock API base URL)
+### Mock
+Your mock API base URL.
 
 This is your mock API "new" base URL. All the mock API paths you setup are available under `/mock/:token/` for both `GET`and `POST`methods.
 Example (using token and path created in `register`and `setup`section examples):
