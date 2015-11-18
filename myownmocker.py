@@ -1,3 +1,10 @@
+"""
+For some tests  (such as XCode UI Testing) we cannot use dependency injection nor mock classes. The easiest solution is to run the application using a mock server.
+
+There are a few solutions already (such as http://mocky.io and http://mockable.io) but I wanted to make my own, MyOwnMocker.
+
+This code is running live in https://mom.skmobi.com/ so whenever you need, just call MOM.
+"""
 import random
 import string
 import os

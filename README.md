@@ -15,7 +15,7 @@ This code is running live in https://mom.skmobi.com/ so whenever you need, just 
 ## API
 
 #### Register
-Register for a mock token
+Register for a mock token.
 
 This is the first call you need to make to generate a mock API token to create mock API paths later
 
