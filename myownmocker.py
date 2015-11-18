@@ -53,6 +53,22 @@ def index():
 
 @app.route('/register/', methods=['GET'])
 def register():
+    """
+    #### Register (for a mock token)
+
+    This is the first call you need to make to generate a mock API token to create mock API paths later
+
+        GET /register/
+
+    ###### Example Response
+
+        < HTTP/1.1 200 OK
+        < Content-Type: application/json
+
+        {
+          "token": "MeB3aNo4yDXrtNH6"
+        }
+    """
     token = None
 
     for t in xrange(5):
@@ -71,15 +87,43 @@ def register():
 
 @app.route('/setup/<token>/', methods=['POST'])
 def setup(token):
-    '''
-    expected JSON dictionary with:
-    {
-        "path": "/action/path/",
-        "status_code": 200,
-        "content_type": "application/json",
-        "body": "{\"field\": \"value\"}"
-    }
-    '''
+    """
+    ### Setup (a mock path)
+
+    This is the call to setup (create) mock API paths
+
+        POST /setup/:token/
+        Content-Type: application/json
+
+    ###### Parameters
+
+    | Name              | Type      | Description   |
+    | :---------------: |:---------:| :------------:|
+    | path              | string    | **Required**. |
+    | status_code       | int       | **Required**. |
+    | content_type      | string    | **Required**. |
+    | content_encoding  | string    | Optional.     |
+    | body              | string    | Optional.     |
+
+    ###### Example Input
+
+        {
+            "path": "login/",
+            "status_code": 400,
+            "content_type": "application/json",
+            "content_encoding": "UTF-8",
+            "body": "{\\\"code\\\": \\\"invalid_login\\\"}"
+        }
+
+    ###### Example Response
+
+        < HTTP/1.1 200 OK
+        < Content-Type: application/json
+
+        {
+            "message": "ok"
+        }
+    """
 
     mt = db.session.query(MockToken).filter_by(token=token).first()
 
@@ -112,6 +156,19 @@ def setup(token):
 
 @app.route('/mock/<token>/<path:path>', methods=['GET', 'POST'])
 def use_api(token, path):
+    """
+    ### Mock (your mock API base URL)
+
+    This is your mock API "new" base URL. All the mock API paths you setup are available under `/mock/:token/` for both `GET`and `POST`methods.
+    Example (using token and path created in `register`and `setup`section examples):
+
+        $ curl -v https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/
+        < HTTP/1.1 400 BAD REQUEST
+        < Content-Type: application/json
+        < Content-Length: 25
+        <
+        {"code": "invalid_login"}
+    """
     pt = db.session.query(MockPath).filter_by(token_id=token, path=path).first()
 
     if pt is None:
