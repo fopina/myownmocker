@@ -68,7 +68,7 @@ Example (using token and path created in `register`and `setup`section examples):
 
 ## Setting up your own copy of MOM
 
-Using heroku cli, settings your own copy is as easy as:
+Using [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command), setting your own copy is as easy as:
 
     $ git clone https://github.com/fopina/myownmocker
     Cloning into 'myownmocker'...
