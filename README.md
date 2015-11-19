@@ -29,8 +29,10 @@ This is the first call you need to make to generate a mock API token to create m
 
     {
       "token": "MeB3aNo4yDXrtNH6",
-      "setup_url": "https://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
-      "mock_base_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/"
+      "setup_url": "http://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
+      "setup_secure_url": "https://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
+      "mock_base_url": "http://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/",
+      "mock_base_secure_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/"
     }
 
 ### Setup
@@ -68,7 +70,8 @@ This is the call to setup (create or replace) mock API paths
 
     {
         "message": "ok",
-        "path_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/"
+        "path_url": "http://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/",
+        "path_secure_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/"
     }
 
 ### Mock
