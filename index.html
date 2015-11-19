@@ -78,7 +78,11 @@
 &lt; Content-Type: application/json
 
 {
-  "token": "MeB3aNo4yDXrtNH6"
+  "token": "MeB3aNo4yDXrtNH6",
+  "setup_url": "http://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
+  "setup_secure_url": "https://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
+  "mock_base_url": "http://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/",
+  "mock_base_secure_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/"
 }
 </code></pre>
 
@@ -87,7 +91,7 @@
 
 <p>Setup a mock path.</p>
 
-<p>This is the call to setup (create) mock API paths</p>
+<p>This is the call to setup (create or replace) mock API paths</p>
 
 <pre><code>POST /setup/:token/
 Content-Type: application/json
@@ -109,24 +113,29 @@ Content-Type: application/json
 <td align="center">path</td>
 <td align="center">string</td>
 <td align="center">
-<strong>Required</strong>.</td>
+<strong>Required</strong>. The API method path (such as <em>login/</em> or <em>user/fopina/details/</em>)</td>
 </tr>
 <tr>
 <td align="center">status_code</td>
 <td align="center">int</td>
 <td align="center">
-<strong>Required</strong>.</td>
+<strong>Required</strong>. The HTTP response status code</td>
 </tr>
 <tr>
 <td align="center">content_type</td>
 <td align="center">string</td>
 <td align="center">
-<strong>Required</strong>.</td>
+<strong>Required</strong>. The HTTP response content type</td>
+</tr>
+<tr>
+<td align="center">custom_headers</td>
+<td align="center">dictionary</td>
+<td align="center">Optional. Extra HTTP headers to include in the response</td>
 </tr>
 <tr>
 <td align="center">body</td>
 <td align="center">string</td>
-<td align="center">Optional.</td>
+<td align="center">Optional. The body of the response</td>
 </tr>
 </tbody>
 </table>
@@ -138,6 +147,7 @@ Content-Type: application/json
     "path": "login/",
     "status_code": 400,
     "content_type": "application/json",
+    "custom_headers": { "X-My-API-Version": "1" },
     "body": "{\"code\": \"invalid_login\"}"
 }
 </code></pre>
@@ -149,7 +159,9 @@ Content-Type: application/json
 &lt; Content-Type: application/json
 
 {
-    "message": "ok"
+    "message": "ok",
+    "path_url": "http://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/",
+    "path_secure_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/"
 }
 </code></pre>
 
