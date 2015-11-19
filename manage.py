@@ -18,6 +18,8 @@ def initdb():
 def readme():
     import pydoc
     f = open('README.md', 'w')
+    f.write('[![Build Status](https://travis-ci.org/fopina/myownmocker.svg)](https://travis-ci.org/fopina/myownmocker)')
+    f.write('\n\n')
     f.write(pydoc.getdoc(myownmocker))
     f.write('''
 
