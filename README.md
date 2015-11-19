@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/fopina/myownmocker.svg)](https://travis-ci.org/fopina/myownmocker)
-
 For some tests  (such as XCode UI Testing) we cannot use dependency injection nor mock classes. The easiest solution is to run the application using a mock server.
 
 There are a few solutions already (such as http://mocky.io and http://mockable.io) but I wanted to make my own, MyOwnMocker.
@@ -7,6 +5,7 @@ There are a few solutions already (such as http://mocky.io and http://mockable.i
 This code is running live in https://mom.skmobi.com/ so whenever you need, just call MOM.
 
 ## Overview
+[![Build Status](https://travis-ci.org/fopina/myownmocker.svg)](https://travis-ci.org/fopina/myownmocker)
 
 1. [API](#api)
     1.  [Register](#register)
