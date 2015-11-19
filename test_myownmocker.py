@@ -62,6 +62,8 @@ class MOMTestCase(unittest.TestCase):
         self.assertIn('mock_base_url', j)
         self.assertEqual(j['setup_url'], 'http://localhost/setup/%s/' % token)
         self.assertEqual(j['mock_base_url'], 'http://localhost/mock/%s/' % token)
+        self.assertEqual(j['setup_secure_url'], 'https://localhost/setup/%s/' % token)
+        self.assertEqual(j['mock_base_secure_url'], 'https://localhost/mock/%s/' % token)
 
     def test_setup_fail_invalid_token(self):
         res = self.app.post('/setup/invalidToken/', data='{"a":"1"}', content_type='application/json')
@@ -126,6 +128,7 @@ class MOMTestCase(unittest.TestCase):
         j = json.loads(res.data)
         self.assertEqual(j['message'], 'ok')
         self.assertEqual(j['path_url'], 'http://localhost/mock/%s/value' % token)
+        self.assertEqual(j['path_secure_url'], 'https://localhost/mock/%s/value' % token)
 
     def test_path_invalid(self):
         _, token = self._register()

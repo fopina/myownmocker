@@ -77,8 +77,10 @@ def register():
 
         {
           "token": "MeB3aNo4yDXrtNH6",
-          "setup_url": "https://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
-          "mock_base_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/"
+          "setup_url": "http://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
+          "setup_secure_url": "https://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
+          "mock_base_url": "http://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/",
+          "mock_base_secure_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/"
         }
     """
     token = None
@@ -95,7 +97,9 @@ def register():
         return jsonify(
             token=token,
             setup_url='%ssetup/%s/' % (request.url_root, token),
+            setup_secure_url='%ssetup/%s/' % (request.url_root.replace('http://', 'https://'), token),
             mock_base_url='%smock/%s/' % (request.url_root, token),
+            mock_base_secure_url='%smock/%s/' % (request.url_root.replace('http://', 'https://'), token),
         )
     else:
         abort(503, 'Unable to generate a token, please try again')
@@ -139,7 +143,8 @@ def setup(token):
 
         {
             "message": "ok",
-            "path_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/"
+            "path_url": "http://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/",
+            "path_secure_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/"
         }
     """
 
@@ -172,6 +177,7 @@ def setup(token):
     return jsonify(
         message='ok',
         path_url='%smock/%s/%s' % (request.url_root, token, path),
+        path_secure_url='%smock/%s/%s' % (request.url_root.replace('http://', 'https://'), token, path),
     )
 
 
