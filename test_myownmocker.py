@@ -57,6 +57,11 @@ class MOMTestCase(unittest.TestCase):
         self.assertIsNotNone(token_obj)
         self.assertEqual(token_obj.token, token)
         self.assertEqual(token_obj.created_on.date(), datetime.now().date())
+        j = json.loads(res.data)
+        self.assertIn('setup_url', j)
+        self.assertIn('mock_base_url', j)
+        self.assertEqual(j['setup_url'], 'http://localhost/setup/%s/' % token)
+        self.assertEqual(j['mock_base_url'], 'http://localhost/mock/%s/' % token)
 
     def test_setup_fail_invalid_token(self):
         res = self.app.post('/setup/invalidToken/', data='{"a":"1"}', content_type='application/json')
@@ -120,6 +125,7 @@ class MOMTestCase(unittest.TestCase):
         self.assertEqual(res.headers['Content-Type'], 'application/json')
         j = json.loads(res.data)
         self.assertEqual(j['message'], 'ok')
+        self.assertEqual(j['path_url'], 'http://localhost/mock/%s/value' % token)
 
     def test_path_invalid(self):
         _, token = self._register()

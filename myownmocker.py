@@ -5,6 +5,8 @@ There are a few solutions already (such as http://mocky.io and http://mockable.i
 
 This code is running live in https://mom.skmobi.com/ so whenever you need, just call MOM.
 """
+
+__version__ = '1.0'
 import random
 import string
 import os
@@ -74,7 +76,9 @@ def register():
         < Content-Type: application/json
 
         {
-          "token": "MeB3aNo4yDXrtNH6"
+          "token": "MeB3aNo4yDXrtNH6",
+          "setup_url": "https://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
+          "mock_base_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/"
         }
     """
     token = None
@@ -88,7 +92,11 @@ def register():
     if token is not None:
         db.session.add(MockToken(token))
         db.session.commit()
-        return jsonify(token=token)
+        return jsonify(
+            token=token,
+            setup_url='%ssetup/%s/' % (request.url_root, token),
+            mock_base_url='%smock/%s/' % (request.url_root, token),
+        )
     else:
         abort(503, 'Unable to generate a token, please try again')
 
@@ -108,10 +116,10 @@ def setup(token):
 
     | Name              | Type      | Description   |
     | :---------------: |:---------:| :------------:|
-    | path              | string    | **Required**. |
-    | status_code       | int       | **Required**. |
-    | content_type      | string    | **Required**. |
-    | body              | string    | Optional.     |
+    | path              | string    | **Required**. The API method path (such as *login/* or *user/fopina/details/*) |
+    | status_code       | int       | **Required**. The HTTP response status code   |
+    | content_type      | string    | **Required**. The HTTP response content type  |
+    | body              | string    | Optional. The body of the response            |
 
     ###### Example Input
 
@@ -128,7 +136,8 @@ def setup(token):
         < Content-Type: application/json
 
         {
-            "message": "ok"
+            "message": "ok",
+            "path_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/"
         }
     """
 
@@ -158,7 +167,10 @@ def setup(token):
         db.session.commit()
     except KeyError as e:
         abort(400, 'Missing required field: %s' % e.args[0])
-    return jsonify(message='ok')
+    return jsonify(
+        message='ok',
+        path_url='%smock/%s/%s' % (request.url_root, token, path),
+    )
 
 
 @app.route('/mock/<token>/<path:path>', methods=['GET', 'POST'])

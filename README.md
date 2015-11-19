@@ -28,7 +28,9 @@ This is the first call you need to make to generate a mock API token to create m
     < Content-Type: application/json
 
     {
-      "token": "MeB3aNo4yDXrtNH6"
+      "token": "MeB3aNo4yDXrtNH6",
+      "setup_url": "https://mom.skmobi.com/setup/MeB3aNo4yDXrtNH6/",
+      "mock_base_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/"
     }
 
 ### Setup
@@ -43,10 +45,10 @@ This is the call to setup (create) mock API paths
 
 | Name              | Type      | Description   |
 | :---------------: |:---------:| :------------:|
-| path              | string    | **Required**. |
-| status_code       | int       | **Required**. |
-| content_type      | string    | **Required**. |
-| body              | string    | Optional.     |
+| path              | string    | **Required**. The API method path (such as *login/* or *user/fopina/details/*) |
+| status_code       | int       | **Required**. The HTTP response status code   |
+| content_type      | string    | **Required**. The HTTP response content type  |
+| body              | string    | Optional. The body of the response            |
 
 ###### Example Input
 
@@ -63,7 +65,8 @@ This is the call to setup (create) mock API paths
     < Content-Type: application/json
 
     {
-        "message": "ok"
+        "message": "ok",
+        "path_url": "https://mom.skmobi.com/mock/MeB3aNo4yDXrtNH6/login/"
     }
 
 ### Mock
