@@ -36,19 +36,20 @@ This is the first call you need to make to generate a mock API token to create m
 ### Setup
 Setup a mock path.
 
-This is the call to setup (create) mock API paths
+This is the call to setup (create or replace) mock API paths
 
     POST /setup/:token/
     Content-Type: application/json
 
 ###### Parameters
 
-| Name              | Type      | Description   |
-| :---------------: |:---------:| :------------:|
-| path              | string    | **Required**. The API method path (such as *login/* or *user/fopina/details/*) |
-| status_code       | int       | **Required**. The HTTP response status code   |
-| content_type      | string    | **Required**. The HTTP response content type  |
-| body              | string    | Optional. The body of the response            |
+| Name              | Type       | Description   |
+| :---------------: |:----------:| :------------:|
+| path              | string     | **Required**. The API method path (such as *login/* or *user/fopina/details/*) |
+| status_code       | int        | **Required**. The HTTP response status code              |
+| content_type      | string     | **Required**. The HTTP response content type             |
+| custom_headers    | dictionary | Optional. Extra HTTP headers to include in the response  |
+| body              | string     | Optional. The body of the response                       |
 
 ###### Example Input
 
@@ -56,6 +57,7 @@ This is the call to setup (create) mock API paths
         "path": "login/",
         "status_code": 400,
         "content_type": "application/json",
+        "custom_headers": { "X-My-API-Version": "1" },
         "body": "{\"code\": \"invalid_login\"}"
     }
 
