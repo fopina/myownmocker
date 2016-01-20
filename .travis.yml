@@ -6,5 +6,6 @@ install:
   - pip install coveralls
 script:
   - coverage run test_myownmocker.py
+after_success:
+  - coveralls
   - coverage report -m
-after_success: coveralls
