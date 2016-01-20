@@ -15,7 +15,15 @@ def initdb():
 
 
 @manager.command
+def purge():
+    """Purge old tokens"""
+    print 'Using database %s' % myownmocker.db.engine.url
+    print 'Purged %d tokens' % myownmocker.purge_tokens()
+
+
+@manager.command
 def readme():
+    """Regenerate README.md"""
     import pydoc
     f = open('README.md', 'w')
     f.write(pydoc.getdoc(myownmocker))

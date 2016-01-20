@@ -216,6 +216,14 @@ def use_api(token, path):
     return resp
 
 
+def purge_tokens(keep_days=2):
+    import datetime
+    last_date = datetime.datetime.now() - datetime.timedelta(days=keep_days)
+    r = db.session.query(MockToken).filter(MockToken.created_on < last_date).delete(synchronize_session=False)
+    db.session.commit()
+    return r
+
+
 class MockToken(db.Model):
     token = db.Column(db.String(16), primary_key=True)
     created_on = db.Column(db.DateTime, server_default=db.func.now())
