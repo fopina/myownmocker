@@ -193,6 +193,21 @@ class MOMTestCase(unittest.TestCase):
         self.assertEqual(res.data, 'test2')
         return token
 
+    def test_error_500(self):  # for coverage...
+        # disable TESTING so the test app processes all exceptions as normal
+        myownmocker.app.config['TESTING'] = False
+        try:
+            from mock import patch
+        except ImportError:
+            self.skipTest('requires mock, run: pip install mock')
+        # screw something up to force error 500
+        with patch('random.SystemRandom', return_value=None):
+            res, _ = self._register()
+            self.assertEqual(res.status_code, 500)
+            self.assertEqual(res.headers['Content-Type'], 'application/json')
+            j = json.loads(res.data)
+            self.assertEqual(j['message'], u"'NoneType' object has no attribute 'choice'")
+
 
 if __name__ == '__main__':
     unittest.main()
