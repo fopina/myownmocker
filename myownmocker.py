@@ -6,7 +6,7 @@ There are a few solutions already (such as http://mocky.io and http://mockable.i
 This code is running live in https://mom.skmobi.com/ so whenever you need, just call MOM.
 """
 
-__version__ = '1.0'
+__version__ = '1.1'
 import random
 import string
 import os
