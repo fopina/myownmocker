@@ -195,18 +195,4 @@ class MOMTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    cov = None
-    try:
-        import coverage
-        cov = coverage.Coverage()
-        cov.start()
-    except ImportError:
-        print 'WARNING: coverage not found'
-
-    try:
-        unittest.main()
-    finally:
-        if cov:
-            cov.stop()
-            cov.save()
-            cov.report()
+    unittest.main()
