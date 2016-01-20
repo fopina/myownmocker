@@ -18,6 +18,11 @@ class MOMTestCase(unittest.TestCase):
         self.db.session.remove()
         self.db.drop_all()
 
+    def test_index(self):
+        res = self.app.get('/')
+        self.assertEqual(res.status_code, 302)
+        self.assertEqual(res.headers['Location'], 'http://fopina.github.io/myownmocker/')
+
     def _register(self):
         res = self.app.get('/register/')
         token = None
@@ -130,6 +135,21 @@ class MOMTestCase(unittest.TestCase):
         self.assertEqual(j['path_url'], 'http://localhost/mock/%s/value' % token)
         self.assertEqual(j['path_secure_url'], 'https://localhost/mock/%s/value' % token)
 
+    def test_setup_with_slash(self):
+        _, token = self._register()
+        res = self._setup(
+            token,
+            '/value',
+            200,
+            'application/json',
+        )
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers['Content-Type'], 'application/json')
+        j = json.loads(res.data)
+        self.assertEqual(j['message'], 'ok')
+        self.assertEqual(j['path_url'], 'http://localhost/mock/%s/value' % token)
+        self.assertEqual(j['path_secure_url'], 'https://localhost/mock/%s/value' % token)
+
     def test_path_invalid(self):
         _, token = self._register()
 
@@ -207,6 +227,19 @@ class MOMTestCase(unittest.TestCase):
             self.assertEqual(res.headers['Content-Type'], 'application/json')
             j = json.loads(res.data)
             self.assertEqual(j['message'], u"'NoneType' object has no attribute 'choice'")
+
+    def test_purge(self):
+        import datetime
+
+        _, token1 = self._register()
+        _, token2 = self._register()
+        self.assertEqual(self.db.session.query(myownmocker.MockToken).count(), 2)
+        self.assertEqual(myownmocker.purge_tokens(), 0)
+
+        t = self.db.session.query(myownmocker.MockToken).filter(myownmocker.MockToken.token == token1).first()
+        t.created_on -= datetime.timedelta(days=2)
+        self.assertEqual(myownmocker.purge_tokens(), 1)
+        self.assertEqual(self.db.session.query(myownmocker.MockToken).count(), 1)
 
 
 if __name__ == '__main__':
