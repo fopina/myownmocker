@@ -22,7 +22,7 @@ def readme():
     f.write('''
 
 ## Overview
-[![Build Status](https://travis-ci.org/fopina/myownmocker.svg)](https://travis-ci.org/fopina/myownmocker)
+[![Build Status](https://travis-ci.org/fopina/myownmocker.svg)](https://travis-ci.org/fopina/myownmocker) [![Coverage Status](https://coveralls.io/repos/github/fopina/myownmocker/badge.svg?branch=master)](https://coveralls.io/github/fopina/myownmocker?branch=master)
 
 1. [API](#api)
     1.  [Register](#register)

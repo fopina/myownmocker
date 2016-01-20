@@ -5,7 +5,7 @@ There are a few solutions already (such as http://mocky.io and http://mockable.i
 This code is running live in https://mom.skmobi.com/ so whenever you need, just call MOM.
 
 ## Overview
-[![Build Status](https://travis-ci.org/fopina/myownmocker.svg)](https://travis-ci.org/fopina/myownmocker)
+[![Build Status](https://travis-ci.org/fopina/myownmocker.svg)](https://travis-ci.org/fopina/myownmocker) [![Coverage Status](https://coveralls.io/repos/github/fopina/myownmocker/badge.svg?branch=master)](https://coveralls.io/github/fopina/myownmocker?branch=master)
 
 1. [API](#api)
     1.  [Register](#register)
