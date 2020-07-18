@@ -1,5 +1,5 @@
-Flask==0.10.1
-Flask-SQLAlchemy==2.1
-Flask-Script==2.0.5
-gunicorn==19.3.0
-psycopg2==2.6.1
+Flask==1.1.2
+Flask-SQLAlchemy==2.4.4
+Flask-Script==2.0.6
+gunicorn==19.10.0
+psycopg2==2.8.5
